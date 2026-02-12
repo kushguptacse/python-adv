@@ -52,3 +52,17 @@ def greet_without_optional(val: str | None) -> str: # same as greet but modern s
 print(greet('kush'))  # Hello kush
 print(greet(None))  # Hello Guest
 ```
+
+---
+
+## 🔤 Numeric Values - Integers
+
+1. int objects in python is different as compared to other languages like c,c++,js,java. here they dont have fixed size like 32 bit. they take dynamic size. The reason is that they are classes and hence store metadata info also in them. So, even if in other language 1 byte (8 bits) enough to store number from 0-255. here it will take 28.
+```python
+import sys
+
+my_val = 255
+print(f"size: {sys.getsizeof(my_val)} byte")  # size: 28 byte
+my_val = 2**64
+print(f"size: {sys.getsizeof(my_val)} byte")  # size: 36 byte
+```
