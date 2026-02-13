@@ -57,12 +57,32 @@ print(greet(None))  # Hello Guest
 
 ## 🔤 Numeric Values - Integers
 
-1. int objects in python is different as compared to other languages like c,c++,js,java. here they dont have fixed size like 32 bit. they take dynamic size. The reason is that they are classes and hence store metadata info also in them. So, even if in other language 1 byte (8 bits) enough to store number from 0-255. here it will take 28.
+1. Python int objects are arbitrary precision (not fixed 32-bit/64-bit like C/C++/Java). They automatically grow as needed. Internally, they are full objects (PyLongObject) and store metadata along with digit data, which increases memory usage.
+
+For example, although 1 byte (8 bits) is enough to store numbers from 0–255 in low-level languages, Python still uses more memory because every integer is an object.
+
+Python integers do not overflow like fixed-size integers in other languages.
 ```python
 import sys
 
 my_val = 255
-print(f"size: {sys.getsizeof(my_val)} byte")  # size: 28 byte
+print(f"size: {sys.getsizeof(my_val)} bytes")  # size: 28 bytes
 my_val = 2**64
-print(f"size: {sys.getsizeof(my_val)} byte")  # size: 36 byte
+print(f"size: {sys.getsizeof(my_val)} bytes")  # size: 36 bytes
+```
+
+2. Some useful number examples-
+```python
+#convert float to int
+print(int(2.3)) #2
+print(int(2.5)) #2
+print(int(2.9)) #2
+print(int(-2.9)) #-2
+
+#binary literal
+my_binary3 = 0b101010
+print(f"Value: {my_binary3}")#Value: 42
+#hexadecimal literal
+hex_num = 0xA
+print(f"Value: {hex_num}") #Value: 10
 ```
