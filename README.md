@@ -86,3 +86,63 @@ print(f"Value: {my_binary3}")#Value: 42
 hex_num = 0xA
 print(f"Value: {hex_num}") #Value: 10
 ```
+
+---
+
+## 🔤 Numeric Values - Floats
+
+1. C, C++, Java etc.: Float (32bits/4Byte), Double (64bits=8Byte)
+
+Python: Float (64bits=8Byte)
+
+sign: 1bit
+exponent: 11bits
+significant bits: 52bits
+
+But if you create variable and assign a value. it will take minimum of 24 bytes (8 bytes for value and remaining 16 for class metadata)
+
+2. Float value should not be compared using == operater as they can be different due to precision.
+```python
+def float_val_complete(num: float):
+    print(f"value: {num:.32f}")
+float_val_complete(42.09)  # value: 42.09000000000000341060513164848089
+my_fraction = 1 / 10 + 1 / 10 + 1 / 10
+
+val2 = 0.3
+float_val_complete(val2) # value: 0.29999999999999998889776975374843
+# conditions fail as they are not exactly same.
+if my_fraction == val2: #print both are different
+    print("both are same")
+else:
+    print("both are different")
+
+def float_is_equal(
+    x: float,
+    y: float,
+) -> bool:
+    epsilon = 1e-15 # very small number
+    difference = math.fabs(x - y) # difference of 2 numbers 
+    return difference < epsilon # if diff is smaller then epsilon consider them equal
+
+if float_is_equal(val2,my_fraction): #print both are same
+    print("both are same")
+else:
+    print("different")
+```
+
+3. Rounding: round(number, ndigits)
+If ndigits is positive → rounds to decimal places
+
+If ndigits is zero or omitted → rounds to nearest integer
+
+If ndigits is negative → rounds to the left of the decimal point
+```python
+my_float = 142.4242424242
+my_float1 = round(my_float)
+print(my_float1) # 142
+float_val_complete(my_float1) #value: 142.00000000000000000000000000000000
+
+my_float_rounded2 = round(my_float, 4)
+print(my_float_rounded2) #142.4242
+float_val_complete(my_float_rounded2) #142.42420000000001323314791079610586
+```
