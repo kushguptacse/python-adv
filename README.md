@@ -146,3 +146,42 @@ my_float_rounded2 = round(my_float, 4)
 print(my_float_rounded2) #142.4242
 float_val_complete(my_float_rounded2) #142.42420000000001323314791079610586
 ```
+
+---
+
+## 🔤 Logical Expressions - Booleans
+
+1. bool just like int and float are also objects. they are sub-class of int. and it take extra memory for metadata
+```python
+my_bool = True
+print(sys.getsizeof(my_bool))  # 28
+my_bool1 = False
+print(sys.getsizeof(my_bool1))  # 24
+print(issubclass(bool, int)) #True. bool is a subclass of int
+print(isinstance(True,bool)) #True
+print(isinstance(False,bool))#True
+print(isinstance(1,bool)) #False
+print(isinstance(0,bool)) #False
+```
+
+2. is vs. == operator: 'is' and 'is not' checks reference in memory and '==' and '!=' check values of two variables.
+
+For == operator every int value except 1 is False
+
+For is operator exact memory location must match, internal type convertion of int to bool will not result in True.
+```python
+print(my_bool == 1) #True
+print(my_bool == 0) #False
+print(my_bool == 12)  #False
+
+print(my_bool is True) #True
+print(my_bool is  1) #False
+print(my_bool is  0) #False
+print(my_bool is 12)  #False
+print(my_bool is None)  #False
+``` 
+
+3. Every object of a built-in type has a Truth Value.
+
+An instance is True if it is not: None, False, 0, or empty list.
+
