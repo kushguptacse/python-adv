@@ -49,3 +49,7 @@ print_truth_value(2323)#True
 print_truth_value(value5)#True
 print_truth_value(value6)#True
 print_truth_value(value7)#True
+
+print(True + True)  # 2
+print(True * 5)  # 5
+print(False + 10)  # 10
