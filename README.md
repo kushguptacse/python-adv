@@ -151,12 +151,19 @@ float_val_complete(my_float_rounded2) #142.42420000000001323314791079610586
 
 ## 🔤 Logical Expressions - Booleans
 
-1. bool just like int and float are also objects. they are sub-class of int. and it take extra memory for metadata
+1. bool just like int and float are also objects. they are sub-class of int. and it take extra memory for metadata.
+
+True  → integer value 1
+False → integer value 0
+
 ```python
+print(True+True)    #2
+print(True*5)   #5
+print(False+10)   # 10
 my_bool = True
-print(sys.getsizeof(my_bool))  # 28
+print(sys.getsizeof(my_bool))  # platform dependent (often 28)
 my_bool1 = False
-print(sys.getsizeof(my_bool1))  # 24
+print(sys.getsizeof(my_bool1))  # platform dependent
 print(issubclass(bool, int)) #True. bool is a subclass of int
 print(isinstance(True,bool)) #True
 print(isinstance(False,bool))#True
@@ -166,10 +173,11 @@ print(isinstance(0,bool)) #False
 
 2. is vs. == operator: 'is' and 'is not' checks reference in memory and '==' and '!=' check values of two variables.
 
-For == operator every int value except 1 is False
+For == operator every True == 1 and False == 0
 
 For is operator exact memory location must match, internal type convertion of int to bool will not result in True.
 ```python
+my_bool = True
 print(my_bool == 1) #True
 print(my_bool == 0) #False
 print(my_bool == 12)  #False
@@ -179,9 +187,64 @@ print(my_bool is  1) #False
 print(my_bool is  0) #False
 print(my_bool is 12)  #False
 print(my_bool is None)  #False
-``` 
+```
 
 3. Every object of a built-in type has a Truth Value.
 
 An instance is True if it is not: None, False, 0, or empty list.
+```python
+def print_truth_value(var) -> None:
+    print(bool(var))
 
+value1 = None  # None
+value2 = 0  # int
+value3 = False  # bool
+value4 = []  # list
+
+print_truth_value(value1)#False
+print_truth_value(value2)#False
+print_truth_value(value3)#False
+print_truth_value(value4)#False
+
+value5 = 1
+value6 = True
+value7 = [0]
+print_truth_value(2323)#True
+print_truth_value(value5)#True
+print_truth_value(value6)#True
+print_truth_value(value7)#True
+``` 
+
+---
+
+## 🔤 Switch Case: match
+Python 3.10 introduced the match-case statement, which is similar to switch-case in languages like Java, but more powerful. It supports pattern matching, guards, destructuring, and multiple conditions
+```python
+def handle_data(data):
+    match data:
+        # guard condition
+        case v if isinstance(v, int) and v < 0:
+            print("Negative int:", v)
+        # exact value
+        case 100:
+            print("Value is 100")
+        # list destructuring
+        case [a, b]:
+            print("List:", a, b)
+        # list variable unpack
+        case [first, *mid, last]:
+            print("Long list:", first, mid, last)
+        # dict destructuring
+        case {"name": name, "age": age}:
+            print("User:", name, age)
+        # default
+        case _:
+            print("Default:", data)
+
+handle_data(-1) #Negative int: -1
+handle_data(100) #Value is 100
+handle_data([1, 2]) #List: 1 2
+handle_data([1, 2,3,4,5,6]) #Long list: 1 [2, 3, 4, 5] 6
+handle_data({"name": "Kush", "age": 25})# User: Kush 25
+handle_data("kush") #Default: kush
+```
