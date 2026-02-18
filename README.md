@@ -322,8 +322,17 @@ print_memory_address(my_tuple1) # may point to same object due to optimization, 
 ```
 3. Difference between l1 + l2 and l1 += l2 (Object Creation)
 ```python
-l1 = [1, 2] # total 3 objects. 2 int and 1 list
-l2 = [3, 4] # total 3 objects. 2 int and 1 list
+list1 = [1, 2]  # total 3 objects: 2 int objects and 1 list object
+list2 = [3, 4]  # total 3 objects: 2 int objects and 1 list object
+
+list3 = list1 + list2  
+# 1 new object created: new list object [1,2,3,4]
+# No new int objects created (references reused)
+
+list1 += list2  
+# no new object created
+# list1 itself modified in-place to [1,2,3,4]
+
 ```
 
 | Operation      | New list object created | New int objects created | Total new objects created | Original l1 modified | Memory behaviour                   |
