@@ -320,3 +320,17 @@ print(my_tuple1)
 print_memory_address(my_tuple1) # may point to same object due to optimization, but not guaranteed
 
 ```
+3. Difference between l1 + l2 and l1 += l2 (Object Creation)
+```python
+l1 = [1, 2] # total 3 objects. 2 int and 1 list
+l2 = [3, 4] # total 3 objects. 2 int and 1 list
+```
+
+| Operation      | New list object created | New int objects created | Total new objects created | Original l1 modified | Memory behaviour                   |
+| -------------- | ----------------------- | ----------------------- | ------------------------- | -------------------- | ---------------------------------- |
+| `l3 = l1 + l2` | ✅ Yes (1)               | ❌ No                    | **1**                     | ❌ No                 | Creates new list and assigns to l3 |
+| `l1 += l2`     | ❌ No                    | ❌ No                    | **0**                     | ✅ Yes                | Extends existing list in-place     |
+
+Conclusion: For mutable types like list, += modifies object in-place (no new object created).
+
+For immutable types like int, += creates new object.
