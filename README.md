@@ -343,3 +343,32 @@ list1 += list2
 Conclusion: For mutable types like list, += modifies object in-place (no new object created).
 
 For immutable types like int, += creates new object.
+
+---
+
+## 🔤 Function 
+1. All parameters without default values must be defined before parameters with default values in function definition
+```python
+def meth(p1,p2,p3=0,p4=10,p5): # invalid, non default argument cannot come after default argument.
+   print(p1,p2,p3,p4,p5)
+```
+
+2. If mutable variable is passed as default argument then it may lead to unpredictable behaviour. As, Default argument values are evaluated only once at function definition time, not at function call time.
+```python
+def test(val, my_list=[]):
+    my_list.append(val)
+    return (my_list)
+
+print(test("k")) # ['k']
+print(test("l")) #['k', 'l'] 
+
+def test_better(val, my_list: Optional[list]=None):
+    if my_list is None:
+        my_list = []
+
+    my_list.append(val)
+    return my_list
+
+print(test_better("k")) # ['k']
+print(test_better("l")) #['l']
+```
