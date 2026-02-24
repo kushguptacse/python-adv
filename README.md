@@ -372,3 +372,45 @@ def test_better(val, my_list: Optional[list]=None):
 print(test_better("k")) # ['k']
 print(test_better("l")) #['l']
 ```
+
+---
+
+## 🔤 Special Parameters Function 
+1. '/' and '*' : If / and * are not present in the function definition, arguments may be passed to a function by position or by keyword both.
+```python
+def normal(a:any)->None:
+    print(a)
+
+normal(23)
+normal(a=23)
+```
+
+2. Positional-only parameters are placed before / (forward-slash). Use positional-only if you want the name of the parameters to not be available to the user.
+```python
+def positional(a: int, /, b: int) -> None:
+    print(a,b)
+
+positional(1, 2) # 1 2
+positional(1, b=2) # 1 2
+positional(a=1, b=2) # TypeError: positional() got some positional-only arguments passed as keyword arguments: 'a'
+```
+
+3. To mark parameters as keyword-only, indicating the parameters must be passed by keyword argument, place an * in the arguments list just before the first keyword-only parameter.
+```python
+def kwd_only_arg(*, a: int) -> None:
+    print(a)
+
+kwd_only_arg(a=1) #1
+kwd_only_arg(1) #TypeError: kwd_only_arg() takes 0 positional arguments but 1 was given
+```
+
+4. combined example-
+```python
+def combined_example(a: Any, /, b: Any, *, c: Any) -> None:
+    print(a, b, c)
+
+# combined_example(1, 2, 3) not allowed as c is keyword arg
+combined_example(1, 2, c=3)
+combined_example(1, b=2, c=3)
+# combined_example(a=1, b=2, c=3) not allowed as a is positional arg
+```
