@@ -373,6 +373,24 @@ print(test_better("k")) # ['k']
 print(test_better("l")) #['l']
 ```
 
+3. Order of argument in function: Positional-only parameters (/) -> Positional or keyword parameters (with or without Default value) -> *args-> Keyword-only parameters (with or without Default value) -> **kwargs
+```python
+def function(a,b=1,*args, c, d=20 ,**kwargs):
+    print(f"a: {a}, b: {b}, args: {args} , c:{c}, d: {d} , kwargs: {kwargs}")
+
+function(1,2,3,4,c=44) #a: 1, b: 2, args: (3, 4) , c:44, d: 20 , kwargs: {}
+function(1,2,c=3) #a: 1, b: 2, args: () , c:3, d: 20 , kwargs: {}
+function(1,2,3,c=4) #a: 1, b: 2, args: (3,) , c:4, d: 20 , kwargs: {}
+function(1,2,3,4,c=6) #a: 1, b: 2, args: (3, 4) , c:6, d: 20 , kwargs: {}
+function(1,2,3,k1=1,k2=2,c=88) #a: 1, b: 2, args: (3,) , c:88, d: 20 , kwargs: {'k1': 1, 'k2': 2}
+
+def master(a,b,/,c,d=10,*args,e,f=20,**kwargs):
+    print(a,b,c,d,args,e,f,kwargs)
+
+# once keyword argument passed, remaining args must be keyword
+master(1,2,3,4,5,e=6,x=7) #1 2 3 4 (5,) 6 20 {'x': 7}
+```
+
 ---
 
 ## 🔤 Special Parameters Function 
