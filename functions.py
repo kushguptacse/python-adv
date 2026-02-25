@@ -62,3 +62,31 @@ def combined_example(a: Any, /, b: Any, *, c: Any) -> None:
 combined_example(1, 2, c=3)
 combined_example(1, b=2, c=3)
 # combined_example(a=1, b=2, c=3) not allowed as a is positional arg
+
+print("args order-----------")
+
+def function(a,b=1,*args, c, d=20 ,**kwargs):
+    print(f"a: {a}, b: {b}, args: {args} , c:{c}, d: {d} , kwargs: {kwargs}")
+
+function(1,2,3,4,c=44) #a: 1, b: 2, args: (3, 4) , c:44, d: 20 , kwargs: {}
+function(1,2,c=3) #a: 1, b: 2, args: () , c:3, d: 20 , kwargs: {}
+function(1,2,3,c=4) #a: 1, b: 2, args: (3,) , c:4, d: 20 , kwargs: {}
+function(1,2,3,4,c=6) #a: 1, b: 2, args: (3, 4) , c:6, d: 20 , kwargs: {}
+function(1,2,3,k1=1,k2=2,c=88) #a: 1, b: 2, args: (3,) , c:88, d: 20 , kwargs: {'k1': 1, 'k2': 2}
+
+
+def test(a, *args, b):
+    print(a, args, b)
+
+# test(1, 2, 3) # typeerror
+test(1, 2, b=3) #1 (2,) 3
+
+def check(*args, **kwargs):
+    print(args, kwargs)
+
+check(*[1,2], **{'x':3}) # (1,2) {'x':3}
+
+def master(a,b,/,c,d=10,*args,e,f=20,**kwargs):
+    print(a,b,c,d,args,e,f,kwargs)
+
+master(1,2,3,4,5,e=6,x=7) #1 2 3 4 (5,) 6 20 {'x': 7}
