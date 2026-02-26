@@ -432,3 +432,9 @@ combined_example(1, 2, c=3)
 combined_example(1, b=2, c=3)
 # combined_example(a=1, b=2, c=3) not allowed as a is positional arg
 ```
+
+---
+
+## 🔤 Closures and decorators
+1.A closure is an inner function that has access to variables in the local scope of the outer function.
+```
