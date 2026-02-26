@@ -437,4 +437,49 @@ combined_example(1, b=2, c=3)
 
 ## 🔤 Closures and decorators
 1.A closure is an inner function that has access to variables in the local scope of the outer function.
+```python
+def outer(msg: str) -> None:
+    var1 = "hello"
+    var2 = f"{var1} {msg}"
+    def inner():
+        print(var2)
+    inner()
+
+outer("kush")
+```
+
+2. decorator example with arguments passed-
+```python
+def debug(fn):
+    def debugger(*args, **kwargs):
+        print(f"Args: {args}")
+        print(f"Kwargs: {kwargs}")
+        print(f"Function {fn.__name__} called")
+        fn_result = fn(*args, **kwargs)
+        print(f"Function {fn.__name__} returns: {fn_result}")
+        return fn_result
+
+    return debugger
+
+
+@debug
+def something(a, b, c=0,d=4):
+    return a + b if c!=0 else d
+
+something(1, b=2,c=3)
+# Args: (1,)
+# Kwargs: {'b': 2, 'c': 3}
+# Function something called
+# Function something returns: 3
+
+@debug
+def something2(*a, **kwargs):
+    return f"{a}, {kwargs}"
+
+something2(1,2,3,k=2)
+
+# Args: (1, 2, 3)
+# Kwargs: {'k': 2}
+# Function something2 called
+# Function something2 returns: (1, 2, 3), {'k': 2}
 ```
