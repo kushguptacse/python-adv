@@ -22,7 +22,7 @@ print(test("l"))  # ['k', 'l']
 # better way
 
 
-def test_better(val, my_list: Optional[list] = None):
+def test_better(val, my_list: list = None):
     if my_list is None:
         my_list = []
 
@@ -90,3 +90,6 @@ def master(a,b,/,c,d=10,*args,e,f=20,**kwargs):
     print(a,b,c,d,args,e,f,kwargs)
 
 master(1,2,3,4,5,e=6,x=7) #1 2 3 4 (5,) 6 20 {'x': 7}
+
+def master(a,d=10,*args,e,f=20):
+    pass

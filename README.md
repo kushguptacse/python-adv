@@ -363,7 +363,7 @@ def test(val, my_list=[]):
 print(test("k")) # ['k']
 print(test("l")) #['k', 'l'] 
 
-def test_better(val, my_list: Optional[list]=None):
+def test_better(val, my_list: list=None):
     if my_list is None:
         my_list = []
 
@@ -374,7 +374,7 @@ print(test_better("k")) # ['k']
 print(test_better("l")) #['l']
 ```
 
-3. Order of argument in function: Positional-only parameters (/) -> Positional or keyword parameters (with or without Default value) -> *args-> Keyword-only parameters (with or without Default value) -> **kwargs
+3. Order of argument in function:  Positional or keyword parameters (with or without Default value) -> *args-> Keyword-only parameters (with or without Default value) -> **kwargs
 ```python
 def function(a,b=1,*args, c, d=20 ,**kwargs):
     print(f"a: {a}, b: {b}, args: {args} , c:{c}, d: {d} , kwargs: {kwargs}")
@@ -385,11 +385,6 @@ function(1,2,3,c=4) #a: 1, b: 2, args: (3,) , c:4, d: 20 , kwargs: {}
 function(1,2,3,4,c=6) #a: 1, b: 2, args: (3, 4) , c:6, d: 20 , kwargs: {}
 function(1,2,3,k1=1,k2=2,c=88) #a: 1, b: 2, args: (3,) , c:88, d: 20 , kwargs: {'k1': 1, 'k2': 2}
 
-def master(a,b,/,c,d=10,*args,e,f=20,**kwargs):
-    print(a,b,c,d,args,e,f,kwargs)
-
-# once keyword argument passed, remaining args must be keyword
-master(1,2,3,4,5,e=6,x=7) #1 2 3 4 (5,) 6 20 {'x': 7}
 ```
 
 ---
@@ -432,6 +427,13 @@ def combined_example(a: Any, /, b: Any, *, c: Any) -> None:
 combined_example(1, 2, c=3)
 combined_example(1, b=2, c=3)
 # combined_example(a=1, b=2, c=3) not allowed as a is positional arg
+
+# Here e must be passed as keyword only arg, else python gives error becuase d with default value already defind before *args
+def master(a,b,/,c,d=10,*args,e,f=20,**kwargs): 
+    print(a,b,c,d,args,e,f,kwargs)
+
+# once keyword argument passed, remaining args must be keyword
+master(1,2,3,4,5,e=6,x=7) #1 2 3 4 (5,) 6 20 {'x': 7}
 ```
 
 ---
@@ -466,6 +468,8 @@ def debug(fn):
 @debug
 def something(a, b, c=0,d=4):
     return a + b if c!=0 else d
+
+#above line is equivalent of something=debug(something)
 
 something(1, b=2,c=3)
 # Args: (1,)
