@@ -321,7 +321,7 @@ print(my_tuple1)
 print_memory_address(my_tuple1) # may point to same object due to optimization, but not guaranteed
 
 ```
-3. Difference between l1 + l2 and l1 += l2 (Object Creation)
+3. In case of mutable object like List, Difference between l1 + l2 and l1 += l2 (Object Creation)
 ```python
 list1 = [1, 2]  # total 3 objects: 2 int objects and 1 list object
 list2 = [3, 4]  # total 3 objects: 2 int objects and 1 list object
