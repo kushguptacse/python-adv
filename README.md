@@ -167,6 +167,7 @@ print(sys.getsizeof(my_bool1))  # platform dependent
 print(issubclass(bool, int)) #True. bool is a subclass of int
 print(isinstance(True,bool)) #True
 print(isinstance(False,bool))#True
+print(isinstance(False,int))#True
 print(isinstance(1,bool)) #False
 print(isinstance(0,bool)) #False
 ```
