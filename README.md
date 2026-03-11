@@ -503,11 +503,24 @@ something2(1,2,3,k=2)
 | Created When        | When the **class is defined**                   | When the **object is created**                  |
 | Example Use         | Constants, shared configuration                 | Object-specific data                            |
 
-1. Instance method: They have access to class level and instance level variables
+1. Instance method: They have access to class level and instance level data
 ```python
+class Example:
+    class_var = 4
+    def __init__(self):
+        print("inside init")
+        self.ins_var = "kk"
+
+    def ins_method(self):
+        print(self.ins_var, self.class_var, Example.class_var)
+
+print(Example.class_var)  # 4
+obj = Example()  # inside init
+print(obj.ins_var)  # kk
+obj.ins_method()  # kk 4 4
 ```
 
-1. Class method: they have access to class level variables only.  
+1. Class method: they have access to class level data only.  
 ```python
 class Example:
     class_var = 4
@@ -520,6 +533,7 @@ class Example:
         print(cls.class_var)
         #print(cls.ins_var) not available
 
+print(Example.class_var) #4
 Example.class_method() #4
 obj = Example() # inside init
 print(obj.ins_var) #kk
