@@ -633,3 +633,30 @@ class C(A, B):
 C() # print order B, A and C
 print(C.mro()) # [<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class 'object'>]
 ```
+
+---
+
+## 🔤 isinstance vs type vs issubclass methods
+```python
+class Animal:
+    pass
+class Dog(Animal):
+    pass
+d = Dog()
+
+print(isinstance(d,Animal)) # True
+print(isinstance(Dog,Animal)) # False as Dog class not instance of Animal
+print(issubclass(Dog,Animal))# True as Dog is subclass of animal
+#print(issubclass(d,Animal))# wont allowed
+print(type(d)==Dog)# True
+print(type(d)==Animal)# False
+print(type(Dog)==Dog)# False
+print(type(Animal)==Dog)# False
+```
+
+| Feature               | `isinstance()`                                         | `issubclass()`                                 | `type()`                        |
+| --------------------- | ------------------------------------------------------ | ---------------------------------------------- | ------------------------------- |
+| Purpose               | Check if **object belongs to a class**                 | Check if **class inherits from another class** | Get **exact type of an object** |
+| First Argument        | Object (can also be a class since classes are objects) | Class                                          | Object                          |
+| Considers Inheritance | Yes                                                    | Yes                                            | No                              |
+| Example               | `isinstance(d, Animal)` → `True`                       | `issubclass(Dog, Animal)` → `True`             | `type(d) == Animal` → `False`       |
