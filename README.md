@@ -608,3 +608,28 @@ class Greeter:
 g = Greeter("Kush")
 g() # print Hello Kush
 ```
+
+---
+
+## 🔤 Multiple inheritance 
+
+```python
+class A:
+    def __init__(self):
+        super().__init__()
+        print("A")
+
+class B:
+    def __init__(self):
+        super().__init__()
+        print("B")
+
+
+class C(A, B):
+    def __init__(self):
+        super().__init__() # mandatory else parent init won't get invoked
+        print("C")
+
+C() # print order B, A and C
+print(C.mro()) # [<class '__main__.C'>, <class '__main__.A'>, <class '__main__.B'>, <class 'object'>]
+```
