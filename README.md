@@ -493,7 +493,7 @@ something2(1,2,3,k=2)
 
 ## 🔤 Difference between class, instance and static method
 
-Differnece between Instance, class and static method-
+1.Differnece between Instance, class and static method-
 | Aspect                  | **Instance Method**                 | **Class Method**                                    | **Static Method**                                     |
 | ----------------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------------------- |
 | Decorator               | None                                | `@classmethod`                                      | `@staticmethod`                                       |
@@ -503,7 +503,7 @@ Differnece between Instance, class and static method-
 | Primary Purpose         | Operate on **object-specific data** | Operate on **class-level logic or factory methods** | Provide **utility/helper functions** related to class |
 | Method Binding          | Bound to **object instance**        | Bound to **class**                                  | Not bound to instance or class         
 
-1. class variables are shared between all the instances of the class. Instance variables are unique for each object.
+2. class variables are shared between all the instances of the class. Instance variables are unique for each object.
 | Feature             | **Class Level Variable**                        | **Instance Variable**                           |
 | ------------------- | ----------------------------------------------- | ----------------------------------------------- |
 | Definition          | Variable shared by **all objects of the class** | Variable specific to **each object (instance)** |
@@ -514,7 +514,7 @@ Differnece between Instance, class and static method-
 | Created When        | When the **class is defined**                   | When the **object is created**                  |
 | Example Use         | Constants, shared configuration                 | Object-specific data                            |
 
-1. Instance method: They have access to class level and instance level data
+3. Instance method: They have access to class level and instance level data
 ```python
 class Example:
     class_var = 4
@@ -531,7 +531,7 @@ print(obj.ins_var)  # kk
 obj.ins_method()  # kk 4 4
 ```
 
-2. Class method: they have access to class level data only.  
+4. Class method: they have access to class level data only.  
 ```python
 class Example:
     class_var = 4
@@ -551,7 +551,7 @@ print(obj.ins_var) #kk
 obj.class_method() #4
 ```
 
-3. Static method: They are not binded to class nor to instance. they usually created inside class for utility function.
+5. Static method: They are not binded to class nor to instance. they usually created inside class for utility function.
 ```python
 class Example2:
     class_var = 4
@@ -566,4 +566,32 @@ print(Example2.class_var)  # 4
 Example2.static_method(2,3)  # 2 3 4
 Example2.static_method2() # hello
 ```
-               |
+
+---
+
+## 🔤 dunder method = double underscore method (`__method__`)
+
+1. They allow Python classes to define behavior for built-in operations. Python automatically calls them when certain operations occur.
+
+2. using it we can also do operator overloading. example we can override `__add__` method in our custom class and now on calling '+' operator it will get invoked.
+
+```python
+class Number:
+    def __init__(self, a):
+        self._a = a
+
+    def __add__(self, b):
+        return Number(self._a + b._a)
+
+    def __str__(self):
+        return f"{self._a}"
+
+    def __eq__(self, value):
+        return self._a == value._a
+
+a = Number(10)  # call init method
+b = Number(10)  # call init method
+c = a + b  # call add method
+print(c)  # call str method and print 20
+print(a==b) # call eq method and print True
+```
