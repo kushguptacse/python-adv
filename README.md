@@ -520,7 +520,7 @@ print(obj.ins_var)  # kk
 obj.ins_method()  # kk 4 4
 ```
 
-1. Class method: they have access to class level data only.  
+2. Class method: they have access to class level data only.  
 ```python
 class Example:
     class_var = 4
@@ -538,4 +538,20 @@ Example.class_method() #4
 obj = Example() # inside init
 print(obj.ins_var) #kk
 obj.class_method() #4
+```
+
+3. Static method: They are not binded to class nor to instance. they usually created inside class for utility function.
+```python
+class Example2:
+    class_var = 4
+    @staticmethod
+    def static_method(arg1,arg2):
+        print(arg1,arg2,Example2.class_var) 
+    @staticmethod
+    def static_method2():
+        print("hello" )
+
+print(Example2.class_var)  # 4
+Example2.static_method(2,3)  # 2 3 4
+Example2.static_method2() # hello
 ```
