@@ -573,7 +573,7 @@ Example2.static_method2() # hello
 
 1. They allow Python classes to define behavior for built-in operations. Python automatically calls them when certain operations occur.
 
-2. using it we can also do operator overloading. example we can override `__add__` method in our custom class and now on calling '+' operator it will get invoked.
+2. Using it we can also do operator overloading. example we can override `__add__` method in our custom class and now on calling '+' operator it will get invoked.
 
 ```python
 class Number:
@@ -594,4 +594,17 @@ b = Number(10)  # call init method
 c = a + b  # call add method
 print(c)  # call str method and print 20
 print(a==b) # call eq method and print True
+```
+
+3. `__call__` method if provided in class then we can invoke class instance like normal method.
+```python
+class Greeter:
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self):
+        print(f"Hello {self.name}")
+
+g = Greeter("Kush")
+g() # print Hello Kush
 ```

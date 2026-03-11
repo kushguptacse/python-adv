@@ -18,3 +18,13 @@ b = Number(10)  # call init method
 c = a + b  # call add method
 print(c)  # call str method and print 20
 print(a==b) # call eq method and print True
+
+class Greeter:
+    def __init__(self, name):
+        self.name = name
+
+    def __call__(self):
+        print(f"Hello {self.name}")
+
+g = Greeter("Kush")
+g() # print Hello Kush
