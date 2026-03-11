@@ -488,3 +488,40 @@ something2(1,2,3,k=2)
 # Function something2 called
 # Function something2 returns: (1, 2, 3), {'k': 2}
 ```
+
+---
+
+## 🔤 Difference between class, instance and static method
+1. class variables are shared between all the instances of the class. Instance variables are unique for each object.
+| Feature             | **Class Level Variable**                        | **Instance Variable**                           |
+| ------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| Definition          | Variable shared by **all objects of the class** | Variable specific to **each object (instance)** |
+| Where Defined       | Inside the **class**, outside methods           | Usually inside **`__init__()`** using `self`    |
+| Memory Allocation   | **Single copy** shared by all instances         | **Separate copy** for each instance             |
+| Access              | Accessed using **class name or object**         | Accessed using **object (`self`)**              |
+| Modification Effect | Change affects **all instances**                | Change affects **only that instance**           |
+| Created When        | When the **class is defined**                   | When the **object is created**                  |
+| Example Use         | Constants, shared configuration                 | Object-specific data                            |
+
+1. Instance method: They have access to class level and instance level variables
+```python
+```
+
+1. Class method: they have access to class level variables only.  
+```python
+class Example:
+    class_var = 4
+    def __init__(self):
+        print("inside init")
+        self.ins_var = "kk"
+
+    @classmethod
+    def class_method(cls):
+        print(cls.class_var)
+        #print(cls.ins_var) not available
+
+Example.class_method() #4
+obj = Example() # inside init
+print(obj.ins_var) #kk
+obj.class_method() #4
+```
