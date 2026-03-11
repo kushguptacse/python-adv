@@ -492,6 +492,17 @@ something2(1,2,3,k=2)
 ---
 
 ## 🔤 Difference between class, instance and static method
+
+Differnece between Instance, class and static method-
+| Aspect                  | **Instance Method**                 | **Class Method**                                    | **Static Method**                                     |
+| ----------------------- | ----------------------------------- | --------------------------------------------------- | ----------------------------------------------------- |
+| Decorator               | None                                | `@classmethod`                                      | `@staticmethod`                                       |
+| First Parameter         | `self` (instance reference)         | `cls` (class reference)                             | None                                                  |
+| Access to Instance Data | Yes                                 | No                                                  | No                                                    |
+| Access to Class Data    | Yes                                 | Yes                                                 | Only if accessed explicitly using class name          |
+| Primary Purpose         | Operate on **object-specific data** | Operate on **class-level logic or factory methods** | Provide **utility/helper functions** related to class |
+| Method Binding          | Bound to **object instance**        | Bound to **class**                                  | Not bound to instance or class         
+
 1. class variables are shared between all the instances of the class. Instance variables are unique for each object.
 | Feature             | **Class Level Variable**                        | **Instance Variable**                           |
 | ------------------- | ----------------------------------------------- | ----------------------------------------------- |
@@ -555,3 +566,4 @@ print(Example2.class_var)  # 4
 Example2.static_method(2,3)  # 2 3 4
 Example2.static_method2() # hello
 ```
+               |
