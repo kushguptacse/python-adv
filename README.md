@@ -681,6 +681,7 @@ It is called before `__init__` and is responsible for actually creating and retu
 ---
 
 ## 🔤 `__iter__` and `__next__`
+By overriding `__iter__` and `__next__` methods we can create our own Iterator class.
 
 ```python
 class PowerOf2:
@@ -704,4 +705,47 @@ for item in PowerOf2(10):
 
 op = [pow for pow in PowerOf2(10)] 
 print(op)#[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```
+
+---
+
+## 🔤 dataclasses, fields, field, slot
+1. A dataclass is a decorator from the dataclasses module that automatically generates common methods (`__init__`, `__eq__`, `__repr__`, `__hash__`) for classes used mainly to store data.
+
+2. fields() returns metadata about the fields defined in a dataclass.
+
+3. field() is Used to customize individual dataclass attributes.
+
+```python
+from dataclasses import dataclass, field, fields
+
+@dataclass
+class User:
+    name: str
+    age: int
+
+u1 = User('kush',10)
+print(u1) #User(name='kush', age=10)
+
+for f in fields(User):
+    print(f"{f.name}, {f.type}") 
+
+#print   
+#name, <class 'str'>
+#age, <class 'int'>
+
+@dataclass
+class Account:
+    name: str
+    tags: list = field(default_factory=list) # now all object will have there own list instance.
+
+@dataclass(slots=True)
+class User2: # now , no new dynamic attribute can be added in the User2 class instance
+    name: str
+
+u1 = User('lll',23)
+u1.job="cricket"
+
+u2= User2('kush')
+# u2.job="it" #give error that job attribute does not exists
 ```

@@ -24,7 +24,6 @@ class Account:
 class User2: # now , no new dynamic attribute can be added in the User2 class instance
     name: str
 
-
 u1 = User('lll',23)
 u1.job="cricket"
 
