@@ -14,12 +14,11 @@ class PowerOf2:
         else:
             raise StopIteration
 
-
 for item in PowerOf2(10):
     print(item) # print square of numbers from 1 till 10
 
-op = [pow for pow in PowerOf2(10)] #[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
-print(op)
+op = [pow for pow in PowerOf2(10)] 
+print(op)#[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 
 def generator(size):
     i=1

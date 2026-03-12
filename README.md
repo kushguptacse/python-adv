@@ -661,7 +661,6 @@ print(type(Animal)==Dog)# False
 | Considers Inheritance | Yes                                                    | Yes                                            | No                              |
 | Example               | `isinstance(d, Animal)` → `True`                       | `issubclass(Dog, Animal)` → `True`             | `type(d) == Animal` → `False`       |
 
-
 ---
 
 ## 🔤 `__new__` and singleton
@@ -677,3 +676,32 @@ It is called before `__init__` and is responsible for actually creating and retu
 | Return value   | Must return object instance | Must return nothing |
 | First argument | `cls`                       | `self`             |
 | Used for       | Controlling object creation | Setting attributes |
+
+
+---
+
+## 🔤 `__iter__` and `__next__`
+
+```python
+class PowerOf2:
+    def __init__(self, size):
+        self.size = size
+
+    def __iter__(self):
+        self.i = 1
+        return self
+
+    def __next__(self):
+        if self.i <= self.size:
+            pow = self.i**2
+            self.i += 1
+            return pow
+        else:
+            raise StopIteration
+
+for item in PowerOf2(10):
+    print(item) # print square of numbers from 1 till 10
+
+op = [pow for pow in PowerOf2(10)] 
+print(op)#[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+```
