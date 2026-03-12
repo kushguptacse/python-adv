@@ -36,9 +36,9 @@ g()  # print Hello Kush
 print("----------------------__new__----------------------------")
 
 class Dummy:
-    def __new__(cls, name):
+    def __new__(cls, *args, **kwargs):
         print("creating new object")
-        return object.__new__(cls)
+        return super().__new__(cls)
 
     def __init__(self, name):
         print(f"inside init {name}")
@@ -49,13 +49,13 @@ Dummy("kush") # print creating new object first and inside init kush later
 class Singleton:
     _instance = None
 
-    def __new__(cls):
+    def __new__(cls, *args, **kwargs):
         if cls._instance:
             print("Object already exists")
         else:
-            cls._instance = object.__new__(cls)
+            cls._instance = super().__new__(cls)
         return cls._instance
 
 
-print(id(Singleton()))
-print(id(Singleton()))
+print(id(Singleton())) #128446005197216
+print(id(Singleton()))  #128446005197216

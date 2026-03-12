@@ -660,3 +660,20 @@ print(type(Animal)==Dog)# False
 | First Argument        | Object (can also be a class since classes are objects) | Class                                          | Object                          |
 | Considers Inheritance | Yes                                                    | Yes                                            | No                              |
 | Example               | `isinstance(d, Animal)` → `True`                       | `issubclass(Dog, Animal)` → `True`             | `type(d) == Animal` → `False`       |
+
+
+---
+
+## 🔤 `__new__` and singleton
+1. `__new__` is a special method used to create a new instance of a class.
+It is called before `__init__` and is responsible for actually creating and returning the object.
+
+2. Difference between `__new__` and `__init__`
+
+| Feature        | `__new__`                   | `__init__`         |
+| -------------- | --------------------------- | ------------------ |
+| Purpose        | Creates object              | Initializes object |
+| Called         | Before `__init__`           | After `__new__`    |
+| Return value   | Must return object instance | Must return nothing |
+| First argument | `cls`                       | `self`             |
+| Used for       | Controlling object creation | Setting attributes |
