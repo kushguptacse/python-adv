@@ -751,3 +751,47 @@ u1.job="cricket"
 u2= User2('kush')
 # u2.job="it" #give error that job attribute does not exists
 ```
+
+---
+
+## 🔤 namedtuple, NamedTuple, TypedDict
+
+1. we can create class like tuple using namedtuple function.
+
+2. NamedTuple class from typing module can be inheritted also to create NamedTuple. here it is more modern way with option of specifying data type.
+
+3. TypedDict class from typing module can be inheritted to provide key value pair based fields.
+
+| Feature      | namedtuple                | NamedTuple          | TypedDict               |
+| ------------ | ------------------------- | ------------------- | ----------------------- |
+| Module       | collections               | typing              | typing                  |
+| Structure    | Tuple                     | Tuple               | Dictionary              |
+| Mutability   | Immutable                 | Immutable           | Mutable                 |
+| Type hints   | ❌                         | ✅                   | ✅                       |
+| Field access | attribute / index         | attribute / index   | key access              |
+| Use case     | lightweight tuple objects | typed tuple objects | structured dictionaries |
+
+
+```python
+from typing import NamedTuple, TypedDict
+from collections import namedtuple
+
+class Animal(NamedTuple):
+    name: str
+    age: int
+
+a = Animal("Bruno",3)
+print(a) #Animal(name='Bruno', age=3)
+
+a1 = namedtuple("AnimalTest", ["name","age"])
+animal_obj = a1("Bruno",4)
+print(animal_obj) #Animal2(name='Bruno', age=4)
+
+
+class User(TypedDict):
+    name: str
+    age: int
+
+u1: User = {"name": "Jan", "age": 28}
+print(u1)
+```

@@ -17,5 +17,5 @@ class User(TypedDict):
     name: str
     age: int
 
-u1: User = {"name": "Jan", "age": 28, "is_admin": True}
+u1: User = {"name": "Jan", "age": 28}
 print(u1)
