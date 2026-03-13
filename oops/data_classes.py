@@ -24,8 +24,12 @@ class Account:
 class User2: # now , no new dynamic attribute can be added in the User2 class instance
     name: str
 
+    def test(self):
+        print(f"hello {self.name}")
+
 u1 = User('lll',23)
 u1.job="cricket"
 
 u2= User2('kush')
 # u2.job="it" #give error that job attribute does not exists
+u2.test() #hello kush
