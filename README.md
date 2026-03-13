@@ -716,6 +716,8 @@ print(op)#[1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
 
 3. field() is Used to customize individual dataclass attributes.
 
+4. dataclass can also contain method along with fields
+
 ```python
 from dataclasses import dataclass, field, fields
 
