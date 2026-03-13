@@ -39,7 +39,7 @@ switch_case_enum(Colors2.RED) #Colors2.RED
 switch_case_enum(8) #wrong color
 
 class Colors3(Enum):
-    RED = auto()
+    RED = auto() # python assign number from 1 as enum values
     GREEN = auto()
     BLUE = auto()
 
