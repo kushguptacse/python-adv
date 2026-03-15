@@ -857,3 +857,62 @@ switch_case_enum(2) #another:  2
 switch_case_enum(Colors2.RED) #Colors2.RED
 switch_case_enum(8) #wrong color
 ```
+
+---
+
+## 🔤 CPython and Cython / Numba / pybind11
+1. Every Python code is run using Interpreter written in C language called CPython. Just like java needs jvm. 
+
+2. Execution flow when we run: python app.py
+```
+Python Code (.py)
+      ↓
+Bytecode (.pyc)
+      ↓
+CPython Virtual Machine
+      ↓
+Execution
+```
+
+3. Running python code is slow, it can be speed up using Cython / Numba / pybind11
+
+4. Cython converts python code into c and improve speed specially in-case of long loops.
+```python
+Python code
+     ↓
+Cython converts to C
+     ↓
+Compiled extension
+     ↓
+CPython runs it
+```
+
+5. When we need to perform complex mathematical operations, Numba can be used as it provide JIT and convert it into machine code directly during runtime.
+```
+Python function
+     ↓
+Numba JIT compiler
+     ↓
+LLVM machine code
+     ↓
+Executed directly
+```
+
+6. If you already have some functions written in c++ and you want to invoke it in python code then pybind11 provide this bridge. and hence it provides native speed.
+```
+C++ code
+     ↓
+pybind11 binding
+     ↓
+Python module
+     ↓
+Called from Python
+```
+7. Difference:
+
+| Tool         | What it does                                                                   | When to use it                                                | Example Situation                       | Approx Performance / Time                     |
+| ------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------- | --------------------------------------- | --------------------------------------------- |
+| **CPython**  | The **standard Python runtime/interpreter** that executes `.py` code           | When you want to run normal Python programs                   | Web apps, APIs, scripts                 | **Baseline (1× speed)**                       |
+| **Cython**   | Converts **Python code into C and compiles it**, resulting in faster execution | When Python loops or CPU-heavy code are slow                  | Image processing, heavy loops           | **5× – 50× faster than CPython**              |
+| **Numba**    | Compiles Python functions into **machine code at runtime (JIT compilation)**   | When you need to speed up **NumPy or numerical computations** | Data science, matrix calculations       | **10× – 100× faster than CPython**            |
+| **pybind11** | Creates a **bridge to call C++ code from Python**                              | When you want to use **C++ libraries in Python**              | ML frameworks, high-performance engines | **Near native C++ speed (50× – 200× faster)** |
