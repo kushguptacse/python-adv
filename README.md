@@ -876,9 +876,20 @@ Many checks + object handling
 Execution
 ```
 
-3. Python code can be slower for CPU-intensive tasks. Performance can be improved using Cython, Numba, or pybind11.
+3. Why python is slow:
 
-4. Cython converts Python code into C and compiles it, improving performance especially for CPU-heavy loops.
+| Reason                            | Explanation                                                                                              | Example Impact                                     |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| **Interpreted Execution**         | CPython **interprets bytecode instruction by instruction** instead of compiling directly to machine code | Each operation requires multiple interpreter steps |
+| **Dynamic Typing**                | Variable types are determined **at runtime**                                                             | Extra checks for type before performing operations |
+| **Everything is an Object**       | Integers, floats, lists, etc. are **Python objects with metadata**                                       | More memory and processing overhead                |
+| **Global Interpreter Lock (GIL)** | Only **one thread executes Python bytecode at a time**                                                   | CPU-bound multithreading cannot run in parallel    |
+| **Reference Counting & GC**       | CPython manages memory using **reference counting + garbage collection**                                 | Extra operations on every object creation/deletion |
+
+
+4. Python code can be slower for CPU-intensive tasks. Performance can be improved using Cython, Numba, or pybind11.
+
+5. Cython converts Python code into C and compiles it, improving performance especially for CPU-heavy loops.
 ```python
 Python code
      ↓
@@ -889,7 +900,7 @@ Compiled extension
 CPython runs it
 ```
 
-5. When performing numerical or array-based computations, Numba can be used. It applies JIT (Just-In-Time) compilation and converts Python functions into machine code at runtime.
+6. When performing numerical or array-based computations, Numba can be used. It applies JIT (Just-In-Time) compilation and converts Python functions into machine code at runtime.
 ```
 Python function
      ↓
@@ -900,7 +911,7 @@ LLVM machine code
 Executed directly
 ```
 
-6. If you already have functions written in C++, pybind11 provides bindings so they can be called directly from Python, giving near-native C++ performance.
+7. If you already have functions written in C++, pybind11 provides bindings so they can be called directly from Python, giving near-native C++ performance.
 ```
 C++ code
      ↓
@@ -910,7 +921,7 @@ Python module
      ↓
 Called from Python
 ```
-7. Difference:
+8. Difference:
 
 | Tool         | What it does                                                                   | When to use it                                                | Example Situation                       | Approx Performance / Time                     |
 | ------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------- | --------------------------------------- | --------------------------------------------- |
