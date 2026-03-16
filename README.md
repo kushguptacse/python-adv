@@ -861,22 +861,24 @@ switch_case_enum(8) #wrong color
 ---
 
 ## 🔤 CPython and Cython / Numba / pybind11
-1. Every Python code is run using Interpreter written in C language called CPython. Just like java needs jvm. 
+1. Most Python code runs on the CPython interpreter, which is implemented in C. Similar to how Java programs run on the JVM, Python code runs on the CPython virtual machine.
 
 2. Execution flow when we run: python app.py
 ```
-Python Code (.py)
-      ↓
-Bytecode (.pyc)
-      ↓
-CPython Virtual Machine
-      ↓
+Python code
+     ↓
+Bytecode
+     ↓
+CPython Interpreter
+     ↓
+Many checks + object handling
+     ↓
 Execution
 ```
 
-3. Running python code is slow, it can be speed up using Cython / Numba / pybind11
+3. Python code can be slower for CPU-intensive tasks. Performance can be improved using Cython, Numba, or pybind11.
 
-4. Cython converts python code into c and improve speed specially in-case of long loops.
+4. Cython converts Python code into C and compiles it, improving performance especially for CPU-heavy loops.
 ```python
 Python code
      ↓
@@ -887,7 +889,7 @@ Compiled extension
 CPython runs it
 ```
 
-5. When we need to perform complex mathematical operations, Numba can be used as it provide JIT and convert it into machine code directly during runtime.
+5. When performing numerical or array-based computations, Numba can be used. It applies JIT (Just-In-Time) compilation and converts Python functions into machine code at runtime.
 ```
 Python function
      ↓
@@ -898,7 +900,7 @@ LLVM machine code
 Executed directly
 ```
 
-6. If you already have some functions written in c++ and you want to invoke it in python code then pybind11 provide this bridge. and hence it provides native speed.
+6. If you already have functions written in C++, pybind11 provides bindings so they can be called directly from Python, giving near-native C++ performance.
 ```
 C++ code
      ↓
