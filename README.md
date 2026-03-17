@@ -929,3 +929,37 @@ Called from Python
 | **Cython**   | Converts **Python code into C and compiles it**, resulting in faster execution | When Python loops or CPU-heavy code are slow                  | Image processing, heavy loops           | **5× – 50× faster than CPython**              |
 | **Numba**    | Compiles Python functions into **machine code at runtime (JIT compilation)**   | When you need to speed up **NumPy or numerical computations** | Data science, matrix calculations       | **10× – 100× faster than CPython**            |
 | **pybind11** | Creates a **bridge to call C++ code from Python**                              | When you want to use **C++ libraries in Python**              | ML frameworks, high-performance engines | **Near native C++ speed (50× – 200× faster)** |
+
+
+---
+
+## 🔤 Threads, Processes and Async IO
+
+1. In Python, threading is limited by the Global Interpreter Lock (GIL), which allows only one thread to execute Python bytecode at a time even if multiple cpu cores exists. So it provides concurrency but not true parallelism for CPU-bound tasks.
+
+In contrast, Java has no GIL, and its threads map directly to OS threads, allowing true parallel execution across multiple CPU cores. That’s why Java is better for CPU-intensive multithreading, while Python is typically used with threading for I/O-bound tasks or uses multiprocessing for parallelism.
+
+2. For IO bound task if one thread is waiting for IO other can context switch and use it. but if we are dealing with cpu intensive task, thread are not useful in python.
+
+```python
+from threading import Thread
+import time
+
+def worker(sleep_time: float) -> None:
+    print("Start worker")
+    time.sleep(sleep_time)
+    print("End worker")
+
+t1 = Thread(name="t1", target=worker, args=(2.0,))
+
+print(f"Ident: {t1.ident}")  # Ident: None
+print(f"Alive: {t1.is_alive()}")  # Alive: False
+print(f"Name: {t1.name}")  # Name: t1
+
+t1.start() # start the thread
+print(f"Ident: {t1.ident}")  # Ident: 126540744336960
+print(f"Alive: {t1.is_alive()}")  # Alive: True
+print(f"Name: {t1.name}")  # Name: t1
+
+t1.join() # wait for main thread to wait t1 to get completed.
+```
