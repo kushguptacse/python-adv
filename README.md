@@ -937,7 +937,7 @@ Called from Python
 
 1. In Python, threading is limited by the Global Interpreter Lock (GIL), which allows only one thread to execute Python bytecode at a time even if multiple cpu cores exists. So it provides concurrency but not true parallelism for CPU-bound tasks.
 
-In contrast, Java has no GIL, and its threads map directly to OS threads, allowing true parallel execution across multiple CPU cores. That’s why Java is better for CPU-intensive multithreading, while Python is typically used with threading for I/O-bound tasks or uses multiprocessing for parallelism.
+In contrast, Java has no GIL, and its threads map directly to OS threads, allowing true parallel execution across multiple CPU cores. That’s why Java is better for CPU-intensive multithreading, while Python is typically used with threading for I/O-bound tasks.
 
 2. For IO bound task if one thread is waiting for IO other can context switch and use it. but if we are dealing with cpu intensive task, thread are not useful in python.
 
