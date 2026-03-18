@@ -963,3 +963,13 @@ print(f"Name: {t1.name}")  # Name: t1
 
 t1.join() # wait for main thread to wait t1 to get completed.
 ```
+
+3. ThreadPoolExecutor can be used when you want a pool of threads and let Python manage 
+   thread creation, scheduling, and lifecycle (start, reuse, shutdown).
+```python
+with ThreadPoolExecutor(max_workers=10) as executor:
+    futures = [executor.submit(lambda x: x**2, i) for i in range(1, 11)]
+
+    for future in as_completed(futures):
+        print(future.result())
+```
