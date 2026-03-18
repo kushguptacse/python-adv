@@ -966,6 +966,7 @@ t1.join() # wait for main thread to wait t1 to get completed.
 
 3. ThreadPoolExecutor can be used when you want a pool of threads and let Python manage 
    thread creation, scheduling, and lifecycle (start, reuse, shutdown).
+
 ```python
 with ThreadPoolExecutor(max_workers=10) as executor:
     futures = [executor.submit(lambda x: x**2, i) for i in range(1, 11)]
@@ -973,3 +974,49 @@ with ThreadPoolExecutor(max_workers=10) as executor:
     for future in as_completed(futures):
         print(future.result())
 ```
+
+4. In Python, multiprocessing uses separate processes instead of threads, and each process has its own Python interpreter and memory space. Each process runs on a different CPU core, But comes with higher overhead (process creation, inter-process communication)
+
+```python
+from multiprocessing import Process
+import time
+
+def worker():
+    print("Start worker")
+    time.sleep(2)
+    print("End worker")
+
+p1 = Process(target=worker)
+
+print(f"Alive: {p1.is_alive()}")  # False
+
+p1.start()
+print(f"Alive: {p1.is_alive()}")  # True
+
+p1.join()
+```
+
+5. Processes do not share memory (use Queue, Pipe, shared memory).
+
+6. ProcessPoolExecutor is similar to ThreadPoolExecutor, but it uses multiple processes instead of threads.
+
+```python
+from concurrent.futures import ProcessPoolExecutor, as_completed
+
+def square(x):
+    return x ** 2
+
+with ProcessPoolExecutor(max_workers=4) as executor:
+    futures = [executor.submit(square, i) for i in range(1, 11)]
+
+    for future in as_completed(futures):
+        print(future.result())
+```
+
+| Feature       | ThreadPoolExecutor | ProcessPoolExecutor |
+| ------------- | ------------------ | ------------------- |
+| Parallelism   | ❌ (GIL limited)    | ✅ True parallelism  |
+| Best for      | I/O-bound          | CPU-bound           |
+| Memory        | Shared             | Separate            |
+| Startup cost  | Low                | High                |
+| Communication | Easy               | Requires IPC        |
