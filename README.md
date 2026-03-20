@@ -1020,3 +1020,24 @@ with ProcessPoolExecutor(max_workers=4) as executor:
 | Memory        | Shared             | Separate            |
 | Startup cost  | Low                | High                |
 | Communication | Easy               | Requires IPC        |
+
+7. Used for asynchronous programming in Python. It is Based on event loop + coroutines. Runs in single thread but supports concurrency. Non-blocking I/O (does not wait idle). Best for I/O-bound tasks (API calls, DB, network). No true parallelism (GIL still applies). Faster and lightweight vs threads
+
+```python
+import asyncio
+
+async def task1():
+    print("Task 1 start")
+    await asyncio.sleep(2)
+    print("Task 1 end")
+
+async def task2():
+    print("Task 2 start")
+    await asyncio.sleep(1)
+    print("Task 2 end")
+
+async def main():
+    await asyncio.gather(task1(), task2())
+
+asyncio.run(main())
+```
